@@ -3,7 +3,8 @@ from phone_field import PhoneField
 
 
 class Info(models.Model):
-    name = models.CharField(max_length=255)
+    name_uz = models.CharField(max_length=255)
+    name_ru = models.CharField(max_length=255)
     logo = models.ImageField(upload_to='info/')
     instagram = models.URLField()
     telegram = models.URLField()
@@ -11,17 +12,19 @@ class Info(models.Model):
     facebook = models.URLField()
 
     def __str__(self):
-        return self.name
+        return self.name_uz
 
 
 class Slider(models.Model):
-    title = models.CharField(max_length=255)
+    title_uz = models.CharField(max_length=255)
+    title_ru = models.CharField(max_length=255)
     text_uz = models.TextField(null=True)
     text_ru = models.TextField(null=True)
     image = models.ImageField(upload_to='slider/')
+    status = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return self.title_uz
 
 
 class About(models.Model):
