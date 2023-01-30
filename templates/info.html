@@ -1,0 +1,141 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+		<div class="main">
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3">Info</h1>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header"></div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-8">
+											{% if info %}
+											<form action="{% url 'update-info-url' info.id %}" method="post" enctype="multipart/form-data">
+												{% csrf_token %}
+												<div class="row">
+												<div class="input-group mb-3 col-6">
+													<span class="input-group-text">Name Uz</span>
+													<input name="name_uz" type="text" class="form-control" value="{{ info.name_uz }}" required>
+												</div>
+												<div class="input-group mb-3 col-6">
+													<span class="input-group-text">Name Ru</span>
+													<input name="name_ru" type="text" class="form-control" value="{{ info.name_ru }}" required>
+												</div>
+												<div class="input-group mb-3 col-6">
+													<span class="input-group-text">Instagram</span>
+													<input name="instagram" type="url" class="form-control" value="{{ info.instagram }}" required>
+												</div>
+												<div class="input-group mb-3 col-6">
+													<span class="input-group-text">Telegram</span>
+													<input name="telegram" type="url" class="form-control" value="{{ info.telegram }}" required>
+												</div>
+												<div class="input-group mb-3 col-6">
+													<span class="input-group-text">YouTube</span>
+													<input name="youtube" type="url" class="form-control" value="{{ info.youtube }}" required>
+												</div>
+												<div class="input-group mb-3 col-6">
+													<span class="input-group-text">Facebook</span>
+													<input name="facebook" type="url" class="form-control" value="{{ info.facebook }}" required>
+												</div>
+												<div class="col-6">
+													<span class="input-group-text float-left">Logo</span>
+													<input name="logo" type="file" class="ml-1 mt-1">
+												</div>
+												<div class="col-6">
+												<input type="hidden" name="contact_id" value="{{ contact.id }}">
+												<button type="button" class="btn btn-primary" style="float: right" data-bs-toggle="modal" data-bs-target="#centeredModalPrimary">Change</button>
+												<div class="modal fade" id="centeredModalPrimary"  tabindex="-1" aria-hidden="true" style="display: none;">
+													<div class="modal-dialog modal-dialog-centered" style="width:300px" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title">Are you sure?</h5>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																<button type="submit" class="btn btn-primary">Save changes</button>
+															</div>
+														</div>
+													</div>
+												</div>
+												</div>
+											</div>
+											</form>
+											{% else %}
+											<form action="{% url 'create-info-url' %}" method="post" enctype="multipart/form-data">
+												{% csrf_token %}
+												<div class="row">
+												<div class="input-group mb-3 col-6">
+													<span class="input-group-text">Name Uz</span>
+													<input name="name_uz" type="text" class="form-control" required>
+												</div>
+												<div class="input-group mb-3 col-6">
+													<span class="input-group-text">Name Ru</span>
+													<input name="name_ru" type="text" class="form-control" required>
+												</div>
+												<div class="input-group mb-3 col-6">
+													<span class="input-group-text">Instagram</span>
+													<input name="instagram" type="url" class="form-control" required>
+												</div>
+												<div class="input-group mb-3 col-6">
+													<span class="input-group-text">Telegram</span>
+													<input name="telegram" type="url" class="form-control" required>
+												</div>
+												<div class="input-group mb-3 col-6">
+													<span class="input-group-text">YouTube</span>
+													<input name="youtube" type="url" class="form-control" required>
+												</div>
+												<div class="input-group mb-3 col-6">
+													<span class="input-group-text">Facebook</span>
+													<input name="facebook" type="url" class="form-control" required>
+												</div>
+												<div class="col-6">
+													<span class="input-group-text float-left">Logo</span>
+													<input name="logo" type="file" class="ml-1 mt-1">
+												</div>
+												<div class="col-2">
+													<button type="submit" class="btn btn-primary" >Create</button>
+												</div>
+												</div>
+											</form>
+											{% endif %}
+										</div>
+										<div class="col-4">
+											{% if info %}
+											<div class="text-center">
+												{% if info.logo %}
+												<img src="{{ info.logo.url }}" style="height:100%;" alt="logo">
+												{% endif %}
+											</div>
+											<form action="{% url 'delete-info-url' info.id %}">
+												<button type="button" class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#deleteinfoMD">Delete</button>
+												<div class="modal fade" id="deleteinfoMD"  tabindex="-1" aria-hidden="true" style="display: none;">
+													<div class="modal-dialog modal-dialog-centered" style="width:300px" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title">Are you sure?</h5>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																<button type="submit" class="btn btn-danger">Delete</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+		</div>
+{% endblock content %}

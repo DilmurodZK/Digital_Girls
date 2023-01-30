@@ -26,7 +26,7 @@ def info(request):
 
 @api_view(['GET'])
 def slider(request):
-    slider = Slider.objects.last()
+    slider = Slider.objects.filter(status=True)
     ser = SliderSerializer(slider)
     return Response(ser.data)
 
@@ -40,14 +40,14 @@ def about(request):
 
 @api_view(['GET'])
 def about_item(request):
-    about_item = AboutItem.objects.all()
+    about_item = AboutItem.objects.filter(status=True)
     ser = AboutItemSerializer(about_item, many=True)
     return Response(ser.data)
 
 
 @api_view(['GET'])
 def course_item(request):
-    course_item = CourseItem.objects.all()
+    course_item = CourseItem.objects.filter(status=True)
     ser = CourseItemSerializer(course_item, many=True)
     return Response(ser.data)
 
@@ -75,7 +75,7 @@ def result(request):
 
 @api_view(['GET'])
 def result_item(request):
-    result_item = ResultItem.objects.all()
+    result_item = ResultItem.objects.filter(status=True)
     ser = ResultItemSerializer(result_item, many=True)
     return Response(ser.data)
 

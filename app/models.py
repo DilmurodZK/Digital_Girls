@@ -41,6 +41,7 @@ class AboutItem(models.Model):
     text_uz = models.TextField(null=True)
     text_ru = models.TextField(null=True)
     image = models.ImageField(upload_to='about/')
+    status = models.BooleanField(default=False)
 
 
 class Course(models.Model):
@@ -54,9 +55,10 @@ class Course(models.Model):
 
 
 class CourseItem(models.Model):
-    text_uz = models.TextField(null=True)
-    text_ru = models.TextField(null=True)
+    title_uz = models.TextField(null=True)
+    title_ru = models.TextField(null=True)
     icon = models.ImageField(upload_to='course/')
+    status = models.BooleanField(default=False)
 
 
 class Task(models.Model):
@@ -72,6 +74,7 @@ class Task(models.Model):
 class TaskItem(models.Model):
     title_uz = models.CharField(max_length=255)
     title_ru = models.CharField(max_length=255)
+    status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title_uz
@@ -91,11 +94,12 @@ class ResultItem(models.Model):
     text_uz = models.TextField(null=True)
     text_ru = models.TextField(null=True)
     icon = models.ImageField(upload_to='result/')
+    status = models.BooleanField(default=False)
 
 
 class Contact(models.Model):
     website = models.URLField()
-    phone = PhoneField(help_text='Contact phone number')
+    phone = models.CharField(max_length=13, default="+")
     email = models.EmailField()
     address = models.CharField(max_length=255)
     long = models.FloatField()
@@ -108,7 +112,8 @@ class Application(models.Model):
     birthday = models.DateField()
     email = models.EmailField(unique=True)
     address = models.CharField(max_length=255)
-    phone = PhoneField(help_text='Contact phone number', unique=True)
+    phone = models.CharField(max_length=13, unique=True, default="+")
+    created = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.last_name
